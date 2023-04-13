@@ -1,26 +1,35 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import icon from "./coffee-cup.png";
+import iconCrossed from "./coffee-cup-crossed.png";
+
+import { css } from "@emotion/css";
+import "./App.css";
 
 function App() {
+  const [isUp] = React.useState(false);
   return (
-    <div className="App">
+    <div className={styles.wrapper(isUp)}>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <img src={isUp ? icon : iconCrossed} className="App-logo" alt="logo" />
         <p>
-          Edit <code>src/App.tsx</code> and save to reload.
+          {isUp ? "La machine est opérationnelle" : "la machine est en panne"}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
     </div>
   );
 }
+
+const styles = {
+  wrapper: (isUp: boolean) => css`
+    background-color: ${isUp ? "#28b18d" : "red"};
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+  `,
+};
 
 export default App;
