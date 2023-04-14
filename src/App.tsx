@@ -1,26 +1,21 @@
 import React from "react";
 import icon from "./coffee-cup.png";
 import iconCrossed from "./coffee-cup-crossed.png";
-
 import { css } from "@emotion/css";
 import "./App.css";
 import useWebSocket from "react-use-websocket";
 
 function App() {
   const [isUp, setIsUp] = React.useState(false);
-  const WS_URL = "ws://127.0.0.1:8999";
+  const WS_URL = process.env.REACT_APP_backend || "ws://localhost:8999";
 
-  const {
-    sendMessage,
-    sendJsonMessage,
-    lastMessage,
-    lastJsonMessage,
-    readyState,
-    getWebSocket,
-  } = useWebSocket(WS_URL, {
+  console.log(process.env.REACT_APP_backend);
+
+  useWebSocket(WS_URL, {
     shouldReconnect: (closeEvent) => true,
     onMessage: (message) => {
       // get json data
+      console.log(message.data);
       const data = JSON.parse(message.data);
       setIsUp(data.coffeeStatus);
     },
