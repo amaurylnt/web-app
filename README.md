@@ -41,7 +41,7 @@ Ce projet a été réalisé lors du challenge 48h
 
 ## 🏛️ `Technology used`
 
-- Kotlin
+- TypesScript
 
 #
 
